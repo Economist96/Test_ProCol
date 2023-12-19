@@ -1,0 +1,605 @@
+-------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\OneDrive - Universidad Externado de Colombia\Test_ProCol\Scripts & DoFiles\punto1.2_tes
+> t_proCol.txt
+  log type:  text
+ opened on:  18 Dec 2023, 11:30:37
+
+. //Comando para imporat una hoja de excel con el primer renglon como nombre de columna 
+. import excel "D:\OneDrive\Escritorio\ProColombia\Datos-20231216T185808Z-001\Datos\Master.xlsx", sheet
+> ("Sheet1") firstrow
+(30 vars, 50,000 obs)
+
+. 
+. //Identificando las empresas que han exportado para generar variable dependiente
+. // El comando Tab no devuelve una tabla de frecuencias de la variabale que le pidamos. Adicionalmente
+> , el comando "if" nos permite condicionar las observaciones. != significa diferente y la opción "sort
+> " ordena la tabla de frecuencias de mayor a menor 
+. tab Tipoult10años if Tipoult10años !="No exportó ult. 10 años", sort 
+
+        Tipo..ult.10.años |      Freq.     Percent        Cum.
+--------------------------+-----------------------------------
+               No Mineras |      3,257       99.51       99.51
+                  Mineras |         16        0.49      100.00
+--------------------------+-----------------------------------
+                    Total |      3,273      100.00
+
+. tab Cadenault10años if Cadenault10años!="No exportó ult. 10 años", sort
+
+              Cadena..ult.10.años |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+ Metalmecánica y Otras Industrias |      1,180       36.05       36.05
+                    Agroalimentos |        869       26.55       62.60
+                     Sistema Moda |        617       18.85       81.45
+   Químicos y Ciencias de la Vida |        420       12.83       94.29
+                   Industrias 4.0 |        168        5.13       99.42
+                          Mineras |         16        0.49       99.91
+                            Otros |          3        0.09      100.00
+----------------------------------+-----------------------------------
+                            Total |      3,273      100.00
+
+. tab Sectorult10años if Sectorult10años!="No exportó ult. 10 años", sort
+
+                    Sector..ult.10.años |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                Textiles y confecciones |        369       11.27       11.27
+                          Metalmecánica |        368       11.24       22.52
+                         Otros pecuario |        310        9.47       31.99
+                Instrumentos y aparatos |        182        5.56       37.55
+ Vehículos y otros medios de transporte |        149        4.55       42.10
+                 Flores y plantas vivas |        136        4.16       46.26
+                                Calzado |        126        3.85       50.11
+                      Muebles y maderas |        116        3.54       53.65
+Artículos de hogar oficina hoteles e .. |        110        3.36       57.01
+Frutas y hortalizas frescas y procesa.. |        108        3.30       60.31
+                                Químico |        100        3.06       63.37
+          Cuero y manufacturas de cuero |         97        2.96       66.33
+                       Envases/empaques |         92        2.81       69.14
+             Materiales de construcción |         92        2.81       71.95
+                         Agroindustrial |         88        2.69       74.64
+                             Autopartes |         82        2.51       77.15
+                      Plástico y caucho |         74        2.26       79.41
+                Software y Servicios TI |         70        2.14       81.55
+         Cosméticos y productos de aseo |         58        1.77       83.32
+                                   Café |         54        1.65       84.97
+                           Farmacéutico |         41        1.25       86.22
+                   Material Promocional |         36        1.10       87.32
+                         Otros agrícola |         34        1.04       88.36
+                  Dotación Hospitalaria |         32        0.98       89.34
+                     Derivados del café |         27        0.82       90.16
+                    Joyería y bisutería |         27        0.82       90.99
+                    Acuícola y pesquero |         26        0.79       91.78
+Comunicación gráfica y editorial (bie.. |         26        0.79       92.58
+                           Agroquímicos |         24        0.73       93.31
+                             Artesanías |         20        0.61       93.92
+                         Papel y cartón |         20        0.61       94.53
+   Audiovisuales y contenidos digitales |         18        0.55       95.08
+                                Bebidas |         14        0.43       95.51
+                                 Bovino |         14        0.43       95.94
+                  Cacao y sus derivados |         14        0.43       96.36
+                                 Azúcar |         13        0.40       96.76
+                                 Banano |         13        0.40       97.16
+                       Aceites y grasas |         12        0.37       97.53
+Comunicación gráfica y editorial (ser.. |         11        0.34       97.86
+                 Producción audiovisual |         11        0.34       98.20
+                                    Bpo |         10        0.31       98.50
+                     Servicios de salud |          8        0.24       98.75
+                              Minerales |          6        0.18       98.93
+ Oro, otros metales y piedras preciosas |          6        0.18       99.11
+                                Avícola |          5        0.15       99.27
+Objetos de arte, antigüedades y menajes |          5        0.15       99.42
+          Publicidad y mercadeo digital |          4        0.12       99.54
+                              Animación |          3        0.09       99.63
+                        Artes escénicas |          3        0.09       99.73
+              Educación e investigación |          2        0.06       99.79
+                          Otros mineros |          2        0.06       99.85
+               Petróleo y sus derivados |          2        0.06       99.91
+                                Cárnico |          1        0.03       99.94
+                Lácteos y sus derivados |          1        0.03       99.97
+                            Videojuegos |          1        0.03      100.00
+----------------------------------------+-----------------------------------
+                                  Total |      3,273      100.00
+
+. tab Subsectorult10años if Subsectorult10años!="No exportó ult. 10 años", sort
+
+                 Subsector..ult.10.años |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+             Animales vivos (los demás) |        302        9.23        9.23
+                  Maquinaria industrial |        250        7.64       16.87
+                                Calzado |        128        3.91       20.78
+                         Flores frescas |        120        3.67       24.44
+  Automóviles de turismo y uso familiar |        113        3.45       27.89
+                               Medición |         71        2.17       30.06
+                Software y Servicios TI |         70        2.14       32.20
+                    Aparatos eléctricos |         63        1.92       34.13
+                  Manufacturas de cuero |         61        1.86       35.99
+                         Frutas frescas |         59        1.80       37.79
+         Manufacturas de hierro o acero |         57        1.74       39.54
+                             Café verde |         54        1.65       41.19
+                      Muebles - oficina |         53        1.62       42.80
+            Plástico y sus manufacturas |         53        1.62       44.42
+                                  Jeans |         52        1.59       46.01
+         Envases y empaques de plástico |         49        1.50       47.51
+          Acabados para la construcción |         45        1.37       48.88
+            Telecomunicaciones y sonido |         42        1.28       50.17
+             Madera (muebles y maderas) |         40        1.22       51.39
+                Artículos promocionales |         36        1.10       52.49
+         Frutas y hortalizas procesadas |         35        1.07       53.56
+                Productos farmacéuticos |         35        1.07       54.63
+                    Artículos del hogar |         34        1.04       55.67
+                     Otras confecciones |         34        1.04       56.71
+                                Camisas |         33        1.01       57.71
+                        Telas y tejidos |         32        0.98       58.69
+    Preparaciones alimenticias diversas |         31        0.95       59.64
+                Ropa interior y pijamas |         31        0.95       60.59
+           Cueros en bruto y preparados |         28        0.86       61.44
+       Partes y accesorios de vehículos |         28        0.86       62.30
+                   Ropa casual femenina |         28        0.86       63.15
+                      Derivados de café |         27        0.82       63.98
+Comunicación gráfica y editorial (bie.. |         26        0.79       64.77
+     Productos de panadería y molinería |         26        0.79       65.57
+      Instrumentos, aparatos y prótesis |         25        0.76       66.33
+        Extractos, pigmentos y pinturas |         24        0.73       67.06
+                        Muebles - hogar |         24        0.73       67.80
+                     T-shirts camisetas |         24        0.73       68.53
+                   Motores y sus partes |         23        0.70       69.23
+   Envases y empaques de papel y cartón |         22        0.67       69.91
+                       Otras Autopartes |         22        0.67       70.58
+                      Electrodomésticos |         21        0.64       71.22
+           Productos químicos orgánicos |         20        0.61       71.83
+                      Accesorios (moda) |         19        0.58       72.41
+                             Cosméticos |         19        0.58       72.99
+                Fajas y ropa de control |         19        0.58       73.57
+   Audiovisuales y contenidos digitales |         18        0.55       74.12
+Productos diversos de las industrias .. |         18        0.55       74.67
+                   Ropa formal femenina |         18        0.55       75.22
+                     Hierbas aromáticas |         17        0.52       75.74
+                    Maquinaria agrícola |         17        0.52       76.26
+                Otros productos de aseo |         17        0.52       76.78
+           Plástico en formas primarias |         17        0.52       77.30
+                              Bisutería |         16        0.49       77.79
+                          Fertilizantes |         16        0.49       78.28
+                             Metalurgia |         16        0.49       78.77
+               Otros papeles y cartones |         15        0.46       79.22
+Plástico y caucho (materiales de cons.. |         15        0.46       79.68
+                Alimentos para animales |         13        0.40       80.08
+                         Azúcar de caña |         13        0.40       80.48
+                           Herramientas |         13        0.40       80.87
+         Legumbres y hortalizas frescas |         13        0.40       81.27
+                    Productos capilares |         13        0.40       81.67
+                 Animales vivos (peces) |         12        0.37       82.03
+   Envases y empaques de hierro o acero |         12        0.37       82.40
+                          Plantas vivas |         12        0.37       82.77
+         Productos químicos inorgánicos |         12        0.37       83.13
+                 Aeronaves y sus partes |         11        0.34       83.47
+Comunicación gráfica y editorial (ser.. |         11        0.34       83.81
+               Otros artículos impresos |         11        0.34       84.14
+                 Producción audiovisual |         11        0.34       84.48
+                  Productos editoriales |         11        0.34       84.82
+        Aceites esenciales y resinoides |         10        0.31       85.12
+                   Artículos de oficina |         10        0.31       85.43
+                                    Bpo |         10        0.31       85.73
+                             Orfebrería |         10        0.31       86.04
+                Ropa de bebe - infantil |         10        0.31       86.34
+     Adhesivos y materias albuminoideas |          9        0.27       86.62
+               Animales vivos (bovinos) |          9        0.27       86.89
+                 Bebidas no alcohólicas |          9        0.27       87.17
+Desperdicios y desechos de minerales .. |          9        0.27       87.44
+       Vestidos de baño y ropa de playa |          9        0.27       87.72
+                    Barcos y sus partes |          8        0.24       87.96
+                                  Cacao |          8        0.24       88.21
+                     Filetes de pescado |          8        0.24       88.45
+                                Hilados |          8        0.24       88.70
+                 Otros aceites y grasas |          8        0.24       88.94
+                  Ropa formal masculina |          8        0.24       89.18
+          Semillas y frutos oleaginosos |          8        0.24       89.43
+                     Servicios de salud |          8        0.24       89.67
+                             Accesorios |          7        0.21       89.89
+            Panela y otros edulcorantes |          7        0.21       90.10
+    Partes y accesorios de motocicletas |          7        0.21       90.31
+                      Pieles de babilla |          7        0.21       90.53
+                                Plátano |          7        0.21       90.74
+                          Prefabricados |          7        0.21       90.96
+                  Ropa casual masculina |          7        0.21       91.17
+                          Ropa de hogar |          7        0.21       91.38
+                                 Banano |          6        0.18       91.57
+        Caucho (artículos industriales) |          6        0.18       91.75
+              Caucho y sus manufacturas |          6        0.18       91.93
+                   Confitería de azúcar |          6        0.18       92.12
+                            Estatuillas |          6        0.18       92.30
+                      Metales preciosos |          6        0.18       92.48
+                           Motocicletas |          6        0.18       92.67
+                         Otros textiles |          6        0.18       92.85
+   Productos farmacéuticos veterinarios |          6        0.18       93.03
+                    Bebidas alcohólicas |          5        0.15       93.19
+                             Calcetería |          5        0.15       93.34
+ Carnes y despojos comestibles (bovino) |          5        0.15       93.49
+             Cerámica, arcilla y piedra |          5        0.15       93.64
+                   Dispositivos Médicos |          5        0.15       93.80
+                    Flores artificiales |          5        0.15       93.95
+             Los demás (agroindustrial) |          5        0.15       94.10
+                 Minerales no metálicos |          5        0.15       94.26
+Plástico y caucho (artículos industri.. |          5        0.15       94.41
+             Productos de aseo personal |          5        0.15       94.56
+  Subproductos de origen animal (otros) |          5        0.15       94.71
+                    Abrigos y similares |          4        0.12       94.84
+  Aluminio (materiales de construcción) |          4        0.12       94.96
+                               Cereales |          4        0.12       95.08
+                               Cerámica |          4        0.12       95.20
+                         Desinfectantes |          4        0.12       95.33
+                               Follajes |          4        0.12       95.45
+                             Fungicidas |          4        0.12       95.57
+                  Otros metales comunes |          4        0.12       95.69
+Peletería (cuero manufacturas de cuero) |          4        0.12       95.81
+          Publicidad y mercadeo digital |          4        0.12       95.94
+                    Suéteres y chalecos |          4        0.12       96.06
+               Transporte de mercancías |          4        0.12       96.18
+                        Aceite de palma |          3        0.09       96.27
+                              Animación |          3        0.09       96.36
+               Animales vivos (equinos) |          3        0.09       96.46
+                        Artes escénicas |          3        0.09       96.55
+Carnes y despojos comestibles (avícola) |          3        0.09       96.64
+                                Cemento |          3        0.09       96.73
+                 Conductores eléctricos |          3        0.09       96.82
+                    Confitería de cacao |          3        0.09       96.91
+ Demás manufacturas u objetos de adorno |          3        0.09       97.01
+                    Derivados del cacao |          3        0.09       97.10
+           Envases y empaques de vidrio |          3        0.09       97.19
+                         Hierro y acero |          3        0.09       97.28
+                                Insumos |          3        0.09       97.37
+               Locomotoras y sus partes |          3        0.09       97.46
+    Madera (materiales de construcción) |          3        0.09       97.56
+Objetos de arte, antigüedades y menajes |          3        0.09       97.65
+                Productos audiovisuales |          3        0.09       97.74
+                Transporte de pasajeros |          3        0.09       97.83
+                                 Óptico |          3        0.09       97.92
+                              Alfombras |          2        0.06       97.98
+Atunes frescos, congelados o refriger.. |          2        0.06       98.04
+              Educación e investigación |          2        0.06       98.11
+           Envases y empaques de madera |          2        0.06       98.17
+      Envases y empaques de metal común |          2        0.06       98.23
+                               Especias |          2        0.06       98.29
+                             Herbicidas |          2        0.06       98.35
+                     Llantas neumáticas |          2        0.06       98.41
+                   Los demás (agrícola) |          2        0.06       98.47
+                 Otras cales y cementos |          2        0.06       98.53
+           Otros artículos industriales |          2        0.06       98.59
+                     Papeles corrugados |          2        0.06       98.66
+                  Papeles para imprenta |          2        0.06       98.72
+   Partes de otros medios de transporte |          2        0.06       98.78
+Pastas para moldear y demás preparaci.. |          2        0.06       98.84
+Pescados y subproductos de pescado se.. |          2        0.06       98.90
+               Petróleo y sus derivados |          2        0.06       98.96
+             Remolques y semirremolques |          2        0.06       99.02
+Subproductos de origen animal (avícola) |          2        0.06       99.08
+                                  Armas |          1        0.03       99.11
+       Artículos para fotografía y cine |          1        0.03       99.14
+                                 Carbón |          1        0.03       99.18
+                                  Ceras |          1        0.03       99.21
+                                  Cobre |          1        0.03       99.24
+                           Combustibles |          1        0.03       99.27
+               Demás papeles y cartones |          1        0.03       99.30
+                           Desperdicios |          1        0.03       99.33
+                   Dotaciones hoteleras |          1        0.03       99.36
+           Envases y empaques de caucho |          1        0.03       99.39
+Envases y empaques de fibras naturale.. |          1        0.03       99.42
+                   Industria del tabaco |          1        0.03       99.45
+                           Insecticidas |          1        0.03       99.48
+                                Joyería |          1        0.03       99.51
+                                  Leche |          1        0.03       99.54
+Los demás pescados frescos, congelado.. |          1        0.03       99.57
+                                 Mantas |          1        0.03       99.60
+                Mobiliario hospitalario |          1        0.03       99.63
+            Otros aceites y lubricantes |          1        0.03       99.66
+                  Papeles para empaques |          1        0.03       99.69
+                     Productos cárnicos |          1        0.03       99.73
+           Productos procesados del mar |          1        0.03       99.76
+                              Raticidas |          1        0.03       99.79
+                         Revestimientos |          1        0.03       99.82
+                         Ropa deportiva |          1        0.03       99.85
+                                 Tabaco |          1        0.03       99.88
+         Vehículos para usos especiales |          1        0.03       99.91
+                            Videojuegos |          1        0.03       99.94
+        Vidrio (artículos industriales) |          1        0.03       99.97
+    Vidrio (materiales de construcción) |          1        0.03      100.00
+----------------------------------------+-----------------------------------
+                                  Total |      3,273      100.00
+
+. tab Departamentoult10años if Departamentoult10años!="No exportó ult. 10 años", sort
+
+              Departamento..ult.10.años |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                           Bogotá, D.C. |      1,584       48.40       48.40
+                              Antioquia |        597       18.24       66.64
+                        Valle del Cauca |        291        8.89       75.53
+                           Cundinamarca |        161        4.92       80.45
+                              Atlántico |        152        4.64       85.09
+                              Santander |        114        3.48       88.57
+                     Norte de Santander |         66        2.02       90.59
+                              Risaralda |         58        1.77       92.36
+                                Bolívar |         50        1.53       93.89
+                                 Nariño |         37        1.13       95.02
+                                 Caldas |         26        0.79       95.81
+                                Quindío |         23        0.70       96.52
+                              Magdalena |         20        0.61       97.13
+                                  Huila |         18        0.55       97.68
+                                 Tolima |         15        0.46       98.14
+                                  Cauca |         12        0.37       98.50
+                                Córdoba |         12        0.37       98.87
+                                  Cesar |          9        0.27       99.14
+                                 Boyacá |          6        0.18       99.33
+                             La Guajira |          6        0.18       99.51
+                                   Meta |          6        0.18       99.69
+                                  Sucre |          4        0.12       99.82
+                                  Chocó |          2        0.06       99.88
+                               Amazonas |          1        0.03       99.91
+Archipiélago de San Andrés, Providenc.. |          1        0.03       99.94
+                                Caquetá |          1        0.03       99.97
+                                 Vaupés |          1        0.03      100.00
+----------------------------------------+-----------------------------------
+                                  Total |      3,273      100.00
+
+. 
+. //Todas las tablas de frecuencia nos indica que 3.273 (coincide con la base de empresas exportadoras)
+>  empresas han exportado en los últimos 10 años, por lo tanto a esas empresas se les va a generar una 
+> dummie =1 si han exportado e igual a 0 si no lo han hecho
+. gen exportadora=.
+(50,000 missing values generated)
+
+. replace exportadora=1 if Tipoult10años !="No exportó ult. 10 años"
+(3,273 real changes made)
+
+. replace exportadora=0 if exportadora==.
+(46,727 real changes made)
+
+. // Dummie igual a 1 si la empresa es grande o mediana 
+. gen grande_mediana=1 if TamañoempresaRUES=="Grande" | TamañoempresaRUES=="Mediana"
+(48,209 missing values generated)
+
+. replace grande_mediana=0 if grande_mediana==.
+(48,209 real changes made)
+
+. //Dummie sucursal
+. gen sucursal=.
+(50,000 missing values generated)
+
+. replace sucursal=1 if Sucursalsociedadextranjera=="Si"
+(89 real changes made)
+
+. replace sucursal=0 if Sucursalsociedadextranjera=="No"
+(41,576 real changes made)
+
+. //Categorica trayectoria
+. gen trayectoria=.
+(50,000 missing values generated)
+
+. replace trayectoria=0 if Trayectoriaexpo=="Mineras, chatarra, otros"
+(48 real changes made)
+
+. replace trayectoria=1 if Trayectoriaexpo=="Futuros"
+(48,668 real changes made)
+
+. replace trayectoria=2 if Trayectoriaexpo=="No Constante"
+(752 real changes made)
+
+. replace trayectoria=3 if Trayectoriaexpo=="Pymex"
+(475 real changes made)
+
+. replace trayectoria=4 if Trayectoriaexpo=="Top"
+(57 real changes made)
+
+. //Activos en millones de pesos
+. gen activos2=Activos/2000000000 // Los activos2 quedan medidos en 200 millones de pesos, para poder t
+> ener una mejor interpretación al momento de leer los margins 
+(8,296 missing values generated)
+
+. 
+. // Módelo Probit y Logit 
+. //El comando global me permite llamar estas variables de manera mas fácil para la estimación de model
+> os
+. global ylist exportadora 
+
+. global xlist activos2 Antigüedadempresa grande_mediana sucursal trayectoria
+
+. 
+. // describe: describe el ripo de datos que estamos tratando
+. describe $ylist $xlist 
+
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------------------------------
+exportadora     float   %9.0g                 
+activos2        float   %9.0g                 
+Antigüedademp~a double  %10.0g                Antigüedad.empresa
+grande_mediana  float   %9.0g                 
+sucursal        float   %9.0g                 
+trayectoria     float   %9.0g                 
+
+. // Sum: da estadísticas básicas de las variables
+. summarize $ylist $xlist
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+ exportadora |     50,000      .06546    .2473383          0          1
+    activos2 |     41,704    1.465267    19.50445          0   1723.608
+Antigüedad~a |     41,665      7.4961    8.076687          0   74.86653
+grande_med~a |     50,000      .03582     .185843          0          1
+    sucursal |     41,665    .0021361     .046169          0          1
+-------------+---------------------------------------------------------
+ trayectoria |     50,000      1.0365    .2508565          0          4
+
+. 
+. tabulate $ylist 
+
+exportadora |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     46,727       93.45       93.45
+          1 |      3,273        6.55      100.00
+------------+-----------------------------------
+      Total |     50,000      100.00
+
+. 
+. * Probit model
+. probit $ylist $xlist
+
+Iteration 0:   log likelihood = -8205.4476  
+Iteration 1:   log likelihood = -4442.1226  
+Iteration 2:   log likelihood = -4320.6072  
+Iteration 3:   log likelihood = -4309.4786  
+Iteration 4:   log likelihood = -4309.4693  
+Iteration 5:   log likelihood = -4309.4693  
+
+Probit regression                                      Number of obs =  41,664
+                                                       LR chi2(5)    = 7791.96
+                                                       Prob > chi2   =  0.0000
+Log likelihood = -4309.4693                            Pseudo R2     =  0.4748
+
+-----------------------------------------------------------------------------------
+      exportadora | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------+----------------------------------------------------------------
+         activos2 |   .0012574   .0004003     3.14   0.002     .0004728    .0020419
+Antigüedadempresa |   .0311847    .001304    23.92   0.000      .028629    .0337404
+   grande_mediana |   .6353694   .0485368    13.09   0.000     .5402391    .7304998
+         sucursal |   .3906255   .2087611     1.87   0.061    -.0185387    .7997897
+      trayectoria |   3.099307   .0694624    44.62   0.000     2.963163    3.235451
+            _cons |  -5.425267   .0750852   -72.25   0.000    -5.572431   -5.278103
+-----------------------------------------------------------------------------------
+Note: 0 failures and 78 successes completely determined.
+
+. 
+. * Logit model
+. logit $ylist $xlist
+
+Iteration 0:   log likelihood = -8205.4476  
+Iteration 1:   log likelihood = -4443.3759  
+Iteration 2:   log likelihood = -4335.9344  
+Iteration 3:   log likelihood = -4226.9107  
+Iteration 4:   log likelihood = -4177.6556  
+Iteration 5:   log likelihood = -4171.8542  
+Iteration 6:   log likelihood = -4171.8158  
+Iteration 7:   log likelihood = -4170.6624  
+Iteration 8:   log likelihood = -4169.8884  
+Iteration 9:   log likelihood = -4168.9913  
+Iteration 10:  log likelihood = -4168.9542  
+Iteration 11:  log likelihood = -4168.9542  
+
+Logistic regression                                    Number of obs =  41,664
+                                                       LR chi2(5)    = 8072.99
+                                                       Prob > chi2   =  0.0000
+Log likelihood = -4168.9542                            Pseudo R2     =  0.4919
+
+-----------------------------------------------------------------------------------
+      exportadora | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------+----------------------------------------------------------------
+         activos2 |   .0019325   .0007039     2.75   0.006     .0005529     .003312
+Antigüedadempresa |     .06192   .0026676    23.21   0.000     .0566916    .0671483
+   grande_mediana |    1.32151   .0988334    13.37   0.000       1.1278     1.51522
+         sucursal |   .9351663   .4128586     2.27   0.024     .1259783    1.744354
+      trayectoria |   6.795573   .1982198    34.28   0.000      6.40707    7.184077
+            _cons |  -11.28957   .2123607   -53.16   0.000    -11.70579   -10.87335
+-----------------------------------------------------------------------------------
+Note: 0 failures and 44 successes completely determined.
+
+. 
+. 
+. * Predicted probabilities
+. quietly logit $ylist $xlist // quietly corre el modelo sin mostrarlo en el terminal 
+
+. predict plogit, pr //Genera una columna en la BD que se llama plogit y tiene los valores predichos qu
+> e arroja el modelo
+(8,336 missing values generated)
+
+. 
+. quietly probit $ylist $xlist 
+
+. predict pprobit, pr 
+(8,336 missing values generated)
+
+. 
+. summarize $ylist plogit pprobit 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+ exportadora |     50,000      .06546    .2473383          0          1
+      plogit |     41,664    .0494672    .1595128    .000015          1
+     pprobit |     41,664    .0498512    .1537871   4.85e-08          1
+
+. 
+. 
+. * Percent correctly predicted values
+. quietly logit $ylist $xlist
+
+. estat classification //Identifica los "falsos positivos y negativos" del modelo para dar el porcentaj
+> e de predicción correcto del modelo 
+
+Logistic model for exportadora
+
+              -------- True --------
+Classified |         D            ~D  |      Total
+-----------+--------------------------+-----------
+     +     |      1155            20  |       1175
+     -     |       906         39583  |      40489
+-----------+--------------------------+-----------
+   Total   |      2061         39603  |      41664
+
+Classified + if predicted Pr(D) >= .5
+True D defined as exportadora != 0
+--------------------------------------------------
+Sensitivity                     Pr( +| D)   56.04%
+Specificity                     Pr( -|~D)   99.95%
+Positive predictive value       Pr( D| +)   98.30%
+Negative predictive value       Pr(~D| -)   97.76%
+--------------------------------------------------
+False + rate for true ~D        Pr( +|~D)    0.05%
+False - rate for true D         Pr( -| D)   43.96%
+False + rate for classified +   Pr(~D| +)    1.70%
+False - rate for classified -   Pr( D| -)    2.24%
+--------------------------------------------------
+Correctly classified                        97.78%
+--------------------------------------------------
+
+. 
+. quietly probit $ylist $xlist
+
+. estat classification 
+
+Probit model for exportadora
+
+              -------- True --------
+Classified |         D            ~D  |      Total
+-----------+--------------------------+-----------
+     +     |      1152            10  |       1162
+     -     |       909         39593  |      40502
+-----------+--------------------------+-----------
+   Total   |      2061         39603  |      41664
+
+Classified + if predicted Pr(D) >= .5
+True D defined as exportadora != 0
+--------------------------------------------------
+Sensitivity                     Pr( +| D)   55.90%
+Specificity                     Pr( -|~D)   99.97%
+Positive predictive value       Pr( D| +)   99.14%
+Negative predictive value       Pr(~D| -)   97.76%
+--------------------------------------------------
+False + rate for true ~D        Pr( +|~D)    0.03%
+False - rate for true D         Pr( -| D)   44.10%
+False + rate for classified +   Pr(~D| +)    0.86%
+False - rate for classified -   Pr( D| -)    2.24%
+--------------------------------------------------
+Correctly classified                        97.79%
+--------------------------------------------------
+
+. 
+. save "D:\OneDrive\Escritorio\ProColombia\Datos-20231216T185808Z-001\Datos\Master_Probit_Logit2.dta", 
+> replace
+file D:\OneDrive\Escritorio\ProColombia\Datos-20231216T185808Z-001\Datos\Master_Probit_Logit2.dta
+    saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\OneDrive - Universidad Externado de Colombia\Test_ProCol\Scripts & DoFiles\punto1.2_tes
+> t_proCol.txt
+  log type:  text
+ closed on:  18 Dec 2023, 11:31:03
+-------------------------------------------------------------------------------------------------------
